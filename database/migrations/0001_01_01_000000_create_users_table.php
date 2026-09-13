@@ -18,11 +18,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('must_change_password')->default(true);
             $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamp('last_login_at')->nullable();
             $table->timestamp('blocked_until')->nullable();
-            $table->boolean('active')->nullable();
+            $table->string('status')->default('ativo');
             $table->timestamps();
             $table->softDeletes();
         });

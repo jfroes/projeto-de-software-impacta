@@ -8,7 +8,7 @@
                 <p class="mt-2 text-sm leading-6 text-[#73777f]">Use suas credenciais para continuar.</p>
             </div>
 
-            <form action="#" method="POST" class="space-y-5">
+            <form action="{{ route('authenticate') }}" method="POST" class="space-y-5">
                 @csrf
 
                 <div>
@@ -22,8 +22,13 @@
 
                 <div>
                     <label for="password" class="mb-2 block text-sm font-medium text-[#44474f]">Senha</label>
-                    <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Digite sua senha" required
-                           class="w-full rounded-xl border border-[#74777f] bg-white px-4 py-3 text-[#1a1b20] outline-none transition focus:border-[#006a6a] focus:ring-4 focus:ring-[#c3f0ed]" />
+                    <div class="relative">
+                        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Digite sua senha" required
+                               class="w-full rounded-xl border border-[#74777f] bg-white px-4 py-3 text-[#1a1b20] outline-none transition focus:border-[#006a6a] focus:ring-4 focus:ring-[#c3f0ed]" />
+                        <button type="button" data-toggle-password="password" aria-label="Mostrar senha" class="absolute inset-y-0 right-0 grid w-12 place-items-center text-[#73777f] hover:text-[#006a6a]">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
                     @error('password')
                     <p class="mt-2 text-sm text-[#ba1a1a]">{{ $message }}</p>
                     @enderror
@@ -40,4 +45,17 @@
             </div>
             @enderror
         </section>
+
+    <script>
+        document.querySelectorAll('[data-toggle-password]').forEach((toggleButton) => {
+            toggleButton.addEventListener('click', () => {
+                const passwordInput = document.getElementById(toggleButton.dataset.togglePassword);
+                const isPasswordVisible = passwordInput.type === 'text';
+
+                passwordInput.type = isPasswordVisible ? 'password' : 'text';
+                toggleButton.setAttribute('aria-label', isPasswordVisible ? 'Mostrar senha' : 'Ocultar senha');
+                toggleButton.querySelector('.material-symbols-outlined').textContent = isPasswordVisible ? 'visibility' : 'visibility_off';
+            });
+        });
+    </script>
 </x-layouts.main-layout>

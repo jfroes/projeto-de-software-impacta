@@ -23,6 +23,8 @@
             font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
         }
     </style>
+
+    @livewireStyles
 </head>
 <body class="{{ $class ?? '' }}">
 @auth
@@ -31,25 +33,12 @@
 
     <label for="sidebar-toggle" class="fixed inset-0 z-20 hidden bg-[#1a1b20]/30 peer-checked:block lg:hidden" aria-label="Fechar menu"></label>
 
+    @unless(request()->routeIs('new-user', ''))
     <x-partials.sidebar/>
+    @endunless
+
 
     <div class="min-w-0 flex-1">
-        <header class="flex h-20 items-center justify-between border-b border-[#e1e2e9] bg-[#f8f9ff]/95 px-5 backdrop-blur md:px-8">
-            <div class="flex items-center gap-3">
-                <label for="sidebar-toggle" class="grid h-11 w-11 cursor-pointer place-items-center rounded-full text-[#44474f] hover:bg-[#e8e8ef] lg:hidden" aria-label="Abrir menu">
-                    <span class="material-symbols-outlined">menu</span>
-                </label>
-                <div>
-                    <p class="text-sm font-medium text-[#73777f]">Bem-vindo de volta,</p>
-                    <h1 class="text-xl font-bold tracking-tight text-[#1a1b20]">{{ Auth::user()->name }}</h1>
-                </div>
-            </div>
-
-            <div class="flex h-11 w-11 items-center justify-center rounded-full bg-[#d8e2ff] text-sm font-bold text-[#17437a]" aria-label="Perfil do usuário">
-                {{ auth()->user()->name[0] }}
-            </div>
-        </header>
-
         <main class="p-5 md:p-8">
             {{ $slot }}
         </main>
@@ -57,6 +46,8 @@
 </div>
 @else
     {{ $slot }}
+
 @endauth
+@livewireScripts
 </body>
 </html>

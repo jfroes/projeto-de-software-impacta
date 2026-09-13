@@ -15,6 +15,18 @@
             <span class="material-symbols-outlined">dashboard</span>
             Visão geral
         </a>
+
+        <a href="{{route('profile.edit')}}" class="flex items-center gap-3 rounded-full {{ request()->routeIs('profile.edit') ? 'bg-[#c3f0ed]' : '' }} px-4 py-3 text-sm font-bold text-[#00201f]">
+            <span class="material-symbols-outlined">person</span>
+            Meu Perfil
+        </a>
+
+        @if(Auth::user()->role->canManageUsers())
+        <a href="{{ route('users.index')}} " class="flex items-center gap-3 rounded-full {{ request()->routeIs('users.index') ? 'bg-[#c3f0ed]' : '' }} px-4 py-3 text-sm font-bold text-[#00201f]">
+            <span class="material-symbols-outlined">people</span>
+            Usuários
+        </a>
+        @endif
     </nav>
 
     <div class="border-t border-[#e1e2e9] pt-4">
