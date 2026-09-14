@@ -33,7 +33,7 @@
 
     <label for="sidebar-toggle" class="fixed inset-0 z-20 hidden bg-[#1a1b20]/30 peer-checked:block lg:hidden" aria-label="Fechar menu"></label>
 
-    @unless(request()->routeIs('new-user', ''))
+    @unless(request()->routeIs('new-user', 'users.confirm'))
     <x-partials.sidebar/>
     @endunless
 
