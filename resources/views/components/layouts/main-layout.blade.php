@@ -40,6 +40,7 @@
 
     <div class="min-w-0 flex-1">
         <main class="p-5 md:p-8">
+            <x-partials.flash-alerts />
             {{ $slot }}
         </main>
     </div>

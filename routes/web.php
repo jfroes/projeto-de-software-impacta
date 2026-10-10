@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +16,9 @@ Route::middleware(['auth', 'force.password.change'])->group(function () {
 
     Route::get('/profile', [ProfilesController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfilesController::class, 'update'])->name('profile.update');
+
+    Route::resource('products', ProductController::class);
+    Route::resource('clients', ClientController::class);
 });
 
 Route::middleware('auth')->group(function () {
