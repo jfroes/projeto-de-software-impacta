@@ -21,6 +21,16 @@
             Meu Perfil
         </a>
 
+        <a href="{{ route('products.index') }}" class="flex items-center gap-3 rounded-full {{ request()->routeIs('products.*') ? 'bg-[#c3f0ed]' : '' }} px-4 py-3 text-sm font-bold text-[#00201f]">
+            <span class="material-symbols-outlined">inventory_2</span>
+            Produtos
+        </a>
+
+        <a href="{{ route('clients.index') }}" class="flex items-center gap-3 rounded-full {{ request()->routeIs('clients.*') ? 'bg-[#c3f0ed]' : '' }} px-4 py-3 text-sm font-bold text-[#00201f]">
+            <span class="material-symbols-outlined">group</span>
+            Clientes
+        </a>
+
         @if(Auth::user()->role->canManageUsers())
         <a href="{{ route('users.index')}} " class="flex items-center gap-3 rounded-full {{ request()->routeIs('users.index') ? 'bg-[#c3f0ed]' : '' }} px-4 py-3 text-sm font-bold text-[#00201f]">
             <span class="material-symbols-outlined">people</span>

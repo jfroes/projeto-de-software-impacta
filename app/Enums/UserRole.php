@@ -26,4 +26,12 @@ enum UserRole: string
         };
     }
 
+    public function canManageCatalog(): bool
+    {
+        return match ($this) {
+            self::ADMIN, self::GESTOR => true,
+            self::FUNCIONARIO => false,
+        };
+    }
+
 }
