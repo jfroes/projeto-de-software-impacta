@@ -30,8 +30,8 @@ O projeto foi dividido em 4 entregas incrementais, cada uma com pelo menos 2 fun
 - [x] CRUD de Usuários (admin) + Tela de Perfil
 
 ### Entrega 2 — Cadastros base
-- [ ] CRUD de Produtos
-- [ ] CRUD de Clientes
+- [x] CRUD de Produtos
+- [x] CRUD de Clientes
 
 ### Entrega 3 — Núcleo do domínio
 - [ ] Pedidos (criação com itens, baixa de estoque em transação, snapshot de preço)
