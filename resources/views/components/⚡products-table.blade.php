@@ -87,7 +87,7 @@ new class extends Component {
                                 R$ {{ number_format((float) $product->price, 2, ',', '.') }}
                             </td>
                             <td class="px-5 py-4 text-sm text-[#44474f]">
-                                <div class="flex flex-col gap-1">
+                                <div class="flex  align-items-center gap-1">
                                     <span>{{ $product->stock_quantity }}</span>
                                     @if ($product->isLowStock())
                                         <span class="inline-flex w-fit rounded-full bg-[#fff7d6] px-2.5 py-1 text-xs font-bold text-[#7a5900]">
