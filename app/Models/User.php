@@ -9,11 +9,11 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
-#[Fillable(['name', 'email', 'password', 'role','status','must_change_password', 'last_login_at'])]
+#[Fillable(['name', 'email', 'password', 'role', 'status', 'must_change_password', 'last_login_at'])]
 #[Hidden(['password', 'remember_token', 'token'])]
 class User extends Authenticatable
 {
@@ -25,6 +25,16 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function stockMovements(): HasMany
+    {
+        return $this->hasMany(StockMovement::class);
+    }
+
     protected function casts(): array
     {
         return [

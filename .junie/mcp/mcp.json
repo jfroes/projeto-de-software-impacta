@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/home/josefroes/.config/herd-lite/bin/php",
+            "args": [
+                "/home/josefroes/Projetos/projetos-laravel/gestao-de-produtos/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}

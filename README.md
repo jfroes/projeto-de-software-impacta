@@ -30,17 +30,17 @@ O projeto foi dividido em 4 entregas incrementais, cada uma com pelo menos 2 fun
 - [x] CRUD de Usuários (admin) + Tela de Perfil
 
 ### Entrega 2 — Cadastros base
-- [ ] CRUD de Produtos
-- [ ] CRUD de Clientes
+- [x] CRUD de Produtos
+- [x] CRUD de Clientes
 
 ### Entrega 3 — Núcleo do domínio
-- [ ] Pedidos (criação com itens, baixa de estoque em transação, snapshot de preço)
-- [ ] Faturamento de pedidos + geração de PDF (NF simulada)
+- [x] Pedidos (criação com itens, baixa de estoque em transação, snapshot de preço)
+- [x] Faturamento de pedidos + geração de PDF (NF simulada)
 
 ### Entrega 4 — Fechamento
-- [ ] Relatórios (vendas por período, produtos mais vendidos, pedidos por status)
-- [ ] Movimentação de estoque (histórico/auditoria)
-- [ ] Diagrama de Classes + Diagrama de Casos de Uso
+- [x] Relatórios (vendas por período, produtos mais vendidos, pedidos por status)
+- [x] Movimentação de estoque (histórico/auditoria)
+- [x] Diagrama de Classes + Diagrama de Casos de Uso
 
 > O acompanhamento detalhado de cada entrega está no [GitHub Project](https://github.com/users/jfroes/projects/1/views/1) deste repositório.
 
