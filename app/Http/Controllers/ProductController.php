@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StockMovementType;
 use App\Models\Product;
+use App\Services\StockService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
+    public function __construct(private StockService $stock) {}
+
     /** A listagem e o filtro ficam no componente Livewire <livewire:products-table />. */
     public function index(): View
     {
@@ -27,7 +32,19 @@ class ProductController extends Controller
         $data = $request->validate($this->rules());
         $data['active'] = $request->boolean('active');
 
-        Product::create($data);
+        DB::transaction(function () use ($data) {
+            $product = Product::create($data);
+
+            // Estoque inicial entra no histórico de movimentações.
+            if ($product->stock_quantity > 0) {
+                $this->stock->register(
+                    $product->id,
+                    StockMovementType::ENTRADA,
+                    $product->stock_quantity,
+                    'Estoque inicial',
+                );
+            }
+        });
 
         return redirect()
             ->route('products.index')
@@ -49,7 +66,23 @@ class ProductController extends Controller
         $data = $request->validate($this->rules($product));
         $data['active'] = $request->boolean('active');
 
-        $product->update($data);
+        DB::transaction(function () use ($product, $data) {
+            $previous = $product->stock_quantity;
+
+            $product->update($data);
+
+            // Se o estoque foi alterado direto no formulário, registra a diferença.
+            $difference = $product->stock_quantity - $previous;
+
+            if ($difference !== 0) {
+                $this->stock->register(
+                    $product->id,
+                    $difference > 0 ? StockMovementType::ENTRADA : StockMovementType::SAIDA,
+                    abs($difference),
+                    'Ajuste manual no cadastro',
+                );
+            }
+        });
 
         return redirect()
             ->route('products.index')
@@ -57,7 +90,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Tenta excluir de verdade. Quando existirem pedidos (Entrega 3), o RESTRICT de
+     * Tenta excluir de verdade. Quando existirem pedidos, o RESTRICT de
      * order_items.product_id barra o delete e o produto é apenas desativado,
      * preservando o histórico.
      */
